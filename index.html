@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mahalakshmi Netralaya – Eye Hospital, Khamgaon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold: #b8860b;
+      --gold-light: #f0c040;
+      --gold-pale: #fdf6e3;
+      --deep: #1a1200;
+      --navy: #0d1b2a;
+      --white: #ffffff;
+      --text: #2c2c2c;
+      --muted: #666;
+      --border: #e8d9a0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(26,18,0,0.97);
+      backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 70px;
+      border-bottom: 1px solid rgba(184,134,11,0.3);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo .eye-icon {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .nav-logo-text { color: white; }
+    .nav-logo-text .name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold-light); line-height: 1.1; }
+    .nav-logo-text .sub { font-size: 0.68rem; color: rgba(255,255,255,0.6); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold-light); }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--deep) !important;
+      padding: 9px 22px;
+      border-radius: 25px;
+      font-weight: 600 !important;
+      font-size: 0.85rem !important;
+    }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 25px; height: 2px; background: var(--gold-light); border-radius: 2px; transition: 0.3s; }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0d1b2a 0%, #1a1200 50%, #0a0a0a 100%);
+      display: flex; align-items: center;
+      padding: 100px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    #home::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(184,134,11,0.12) 0%, transparent 60%);
+    }
+    .hero-circles {
+      position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+      width: min(500px, 45vw); height: min(500px, 45vw);
+    }
+    .circle {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(184,134,11,0.2);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+    }
+    .c1 { width: 100%; height: 100%; animation: pulse 4s ease-in-out infinite; }
+    .c2 { width: 75%; height: 75%; border-color: rgba(184,134,11,0.35); animation: pulse 4s ease-in-out infinite 0.8s; }
+    .c3 { width: 50%; height: 50%; border-color: rgba(240,192,64,0.5); animation: pulse 4s ease-in-out infinite 1.6s; }
+    .c4 {
+      width: 25%; height: 25%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      box-shadow: 0 0 40px rgba(184,134,11,0.6);
+    }
+    @keyframes pulse { 0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1} 50%{transform:translate(-50%,-50%) scale(1.04);opacity:0.7} }
+
+    .hero-content { max-width: 580px; position: relative; z-index: 2; animation: fadeUp 1s ease forwards; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(184,134,11,0.15);
+      border: 1px solid rgba(184,134,11,0.4);
+      color: var(--gold-light);
+      padding: 6px 16px; border-radius: 20px;
+      font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-badge span { width: 6px; height: 6px; background: var(--gold-light); border-radius: 50%; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .hero-title .gold { color: var(--gold-light); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 16px;
+      font-weight: 300;
+    }
+    .hero-doctor {
+      font-size: 1rem; color: var(--gold-light);
+      font-weight: 500; margin-bottom: 36px;
+    }
+
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--deep); padding: 14px 32px; border-radius: 30px;
+      font-weight: 700; font-size: 0.95rem; text-decoration: none;
+      box-shadow: 0 4px 20px rgba(184,134,11,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(184,134,11,0.5); }
+    .btn-outline {
+      border: 1.5px solid rgba(255,255,255,0.3);
+      color: white; padding: 14px 32px; border-radius: 30px;
+      font-weight: 500; font-size: 0.95rem; text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-outline:hover { border-color: var(--gold-light); background: rgba(184,134,11,0.1); }
+
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 52px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--gold-light); }
+    .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 90px 5%; }
+    .section-tag {
+      display: inline-block;
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700; color: var(--navy);
+      margin-bottom: 16px; line-height: 1.2;
+    }
+    .section-desc { font-size: 1.05rem; color: var(--muted); max-width: 580px; line-height: 1.7; margin-bottom: 48px; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--gold-pale); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .about-visual {
+      background: linear-gradient(135deg, var(--navy), #1a1200);
+      border-radius: 20px; padding: 50px 40px;
+      text-align: center; color: white;
+      position: relative; overflow: hidden;
+    }
+    .about-visual::before {
+      content: '👁️';
+      position: absolute; top: -20px; right: -20px;
+      font-size: 120px; opacity: 0.05;
+    }
+    .doctor-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--gold-light); margin-bottom: 6px; }
+    .doctor-qual { font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 30px; }
+    .doctor-badge {
+      display: inline-block;
+      background: rgba(184,134,11,0.2); border: 1px solid rgba(184,134,11,0.4);
+      color: var(--gold-light); padding: 6px 18px; border-radius: 20px;
+      font-size: 0.8rem; font-weight: 500;
+    }
+    .about-points { list-style: none; margin-top: 32px; }
+    .about-points li {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+      font-size: 0.97rem; line-height: 1.6;
+    }
+    .about-points li:last-child { border-bottom: none; }
+    .check { color: var(--gold); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+
+    /* ── SERVICES ── */
+    #services { background: white; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+    .service-card {
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 32px 28px;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      background: white; position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform: scaleX(0); transition: transform 0.3s;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); border-color: var(--gold); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon { font-size: 2.2rem; margin-bottom: 16px; }
+    .service-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .service-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── APPOINTMENT ── */
+    #appointment { background: linear-gradient(135deg, var(--navy), #1a1200); }
+    #appointment .section-title { color: white; }
+    #appointment .section-desc { color: rgba(255,255,255,0.6); }
+    #appointment .section-tag { color: var(--gold-light); }
+
+    .appt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .appt-info { color: white; }
+    .contact-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-icon {
+      width: 46px; height: 46px; border-radius: 12px;
+      background: rgba(184,134,11,0.2); border: 1px solid rgba(184,134,11,0.3);
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .contact-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+    .contact-value { font-size: 1rem; color: white; font-weight: 500; }
+    .contact-value a { color: var(--gold-light); text-decoration: none; }
+
+    .appt-form {
+      background: white; border-radius: 20px; padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .form-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--navy); margin-bottom: 24px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text); margin-bottom: 7px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 12px 16px;
+      border: 1.5px solid #e0e0e0; border-radius: 10px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      color: var(--text); transition: border-color 0.2s;
+      background: #fafafa;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--gold); background: white;
+    }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--deep); border: none; padding: 15px;
+      border-radius: 30px; font-family: 'DM Sans', sans-serif;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(184,134,11,0.4); }
+
+    /* ── MAP ── */
+    #location { background: var(--gold-pale); }
+    .map-container { border-radius: 20px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.12); margin-top: 0; }
+    .map-container iframe { width: 100%; height: 420px; border: none; display: block; }
+
+    /* ── HOURS ── */
+    .hours-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-bottom: 40px; }
+    .hours-card {
+      background: white; border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px;
+      text-align: center;
+    }
+    .hours-day { font-weight: 600; color: var(--navy); margin-bottom: 6px; font-size: 0.95rem; }
+    .hours-time { font-size: 0.88rem; color: var(--gold); font-weight: 500; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--deep); color: rgba(255,255,255,0.6);
+      padding: 50px 5% 30px;
+    }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand .name { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold-light); margin-bottom: 8px; }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.7; }
+    .footer-col h4 { color: white; font-size: 0.9rem; font-weight: 600; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .footer-col a { display: block; color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.88rem; margin-bottom: 10px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--gold-light); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; text-align: center; font-size: 0.82rem; }
+    .footer-bottom span { color: var(--gold-light); }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: #25d366;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 1.6rem;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-grid, .appt-grid, .footer-grid { grid-template-columns: 1fr; }
+      .hero-circles { display: none; }
+      .hero-content { max-width: 100%; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 70px 5%; }
+      .hero-stats { gap: 24px; }
+    }
+
+    /* Scroll fade-in */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="eye-icon">👁️</div>
+    <div class="nav-logo-text">
+      <div class="name">Mahalakshmi Netralaya</div>
+      <div class="sub">Eye Hospital • Khamgaon</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="#appointment" class="nav-cta">Book Appointment</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-content">
+    <div class="hero-badge"><span></span> Trusted Eye Care in Khamgaon</div>
+    <h1 class="hero-title">Caring for Your<br><span class="gold">Vision & Eyes</span></h1>
+    <p class="hero-sub">Complete Ophthalmology Services Under One Roof</p>
+    <p class="hero-doctor">👨‍⚕️ Dr. Akash Mahore — M.S. Ophthalmology</p>
+    <div class="hero-btns">
+      <a href="#appointment" class="btn-primary">📅 Book Appointment</a>
+      <a href="tel:8970007351" class="btn-outline">📞 Call Now</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">All</div>
+        <div class="stat-label">Eye Specialities</div>
+      </div>
+      <div>
+        <div class="stat-num">MS</div>
+        <div class="stat-label">Qualified Surgeon</div>
+      </div>
+      <div>
+        <div class="stat-num">Khamgaon</div>
+        <div class="stat-label">Maharashtra</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-circles">
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+    <div class="circle c3"></div>
+    <div class="circle c4">👁️</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual fade-in">
+      <div style="font-size:5rem;margin-bottom:20px;">👁️</div>
+      <div class="doctor-name">Dr. Akash Mahore</div>
+      <div class="doctor-qual">M.S. Ophthalmology</div>
+      <div class="doctor-badge">🏥 Eye Surgeon & Specialist</div>
+      <div style="margin-top:28px;padding:20px;background:rgba(255,255,255,0.05);border-radius:12px;font-size:0.88rem;color:rgba(255,255,255,0.7);line-height:1.7;">
+        Dedicated to providing world-class eye care to the people of Khamgaon and surrounding regions with compassion and expertise.
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="section-tag">About Us</div>
+      <h2 class="section-title">Mahalakshmi Netralaya</h2>
+      <p class="section-desc" style="margin-bottom:24px;">A trusted eye hospital in Khamgaon, Maharashtra, offering complete ophthalmology services with advanced technology and expert care.</p>
+      <ul class="about-points">
+        <li><span class="check">✦</span> Led by Dr. Akash Mahore, M.S. Ophthalmology — a highly qualified eye surgeon</li>
+        <li><span class="check">✦</span> Full spectrum of ophthalmic services from routine checkups to complex surgeries</li>
+        <li><span class="check">✦</span> Modern diagnostic equipment for accurate diagnosis and treatment</li>
+        <li><span class="check">✦</span> Patient-first approach — affordable, compassionate, and quality care</li>
+        <li><span class="check">✦</span> Serving Khamgaon and surrounding areas of Maharashtra</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div style="text-align:center;">
+    <div class="section-tag">What We Treat</div>
+    <h2 class="section-title" style="margin:0 auto 16px;">Our Speciality Services</h2>
+    <p class="section-desc" style="margin:0 auto 48px;">We offer all speciality ophthalmology services with the latest techniques and technology.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-in">
+      <div class="service-icon">🔬</div>
+      <div class="service-name">Cataract Surgery</div>
+      <div class="service-desc">Advanced phacoemulsification and IOL implantation for restoring clear vision with minimal recovery time.</div>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">✨</div>
+      <div class="service-name">LASIK & Refractive Surgery</div>
+      <div class="service-desc">Freedom from glasses and contact lenses with precise laser correction for myopia, hyperopia, and astigmatism.</div>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">🫀</div>
+      <div class="service-name">Glaucoma Management</div>
+      <div class="service-desc">Early detection and treatment of glaucoma to prevent vision loss and preserve long-term eye health.</div>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">👁️</div>
+      <div class="service-name">Retina Services</div>
+      <div class="service-desc">Diagnosis and treatment of diabetic retinopathy, macular degeneration, and retinal detachments.</div>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">🧒</div>
+      <div class="service-name">Pediatric Eye Care</div>
+      <div class="service-desc">Specialized eye examinations and treatments for children including squint correction and amblyopia therapy.</div>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">👓</div>
+      <div class="service-name">Optical & Contact Lenses</div>
+      <div class="service-desc">Complete eye examination with prescription glasses, contact lenses, and low vision aids.</div>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">💧</div>
+      <div class="service-name">Dry Eye Treatment</div>
+      <div class="service-desc">Comprehensive evaluation and management of dry eye syndrome for comfortable, healthy vision.</div>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">🔭</div>
+      <div class="service-name">Squint (Strabismus)</div>
+      <div class="service-desc">Diagnosis and surgical/non-surgical correction of squint in children and adults.</div>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">🩺</div>
+      <div class="service-name">Routine Eye Checkup</div>
+      <div class="service-desc">Comprehensive eye examination for vision screening, spectacle power check, and general eye health assessment.</div>
+    </div>
+  </div>
+</section>
+
+<!-- APPOINTMENT -->
+<section id="appointment">
+  <div class="appt-grid">
+    <div class="appt-info fade-in">
+      <div class="section-tag">Get In Touch</div>
+      <h2 class="section-title">Book Your Appointment</h2>
+      <p class="section-desc">Don't let eye problems affect your quality of life. Contact us today to schedule a consultation.</p>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value"><a href="tel:8970007351">89700 07351</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:mahalakshminetralaya@gmail.com">mahalakshminetralaya@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Khamgaon, Maharashtra</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">⏰</div>
+        <div>
+          <div class="contact-label">Hours</div>
+          <div class="contact-value">Mon–Sat: 9:00 AM – 7:00 PM</div>
+        </div>
+      </div>
+    </div>
+    <div class="appt-form fade-in">
+      <div class="form-title">📅 Request an Appointment</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" placeholder="Your full name" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" placeholder="Your mobile number" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Preferred Date</label>
+          <input type="date" />
+        </div>
+        <div class="form-group">
+          <label>Service Required</label>
+          <select>
+            <option value="">Select service...</option>
+            <option>Cataract Surgery</option>
+            <option>LASIK Surgery</option>
+            <option>Glaucoma Check</option>
+            <option>Retina Services</option>
+            <option>Pediatric Eye Care</option>
+            <option>Routine Eye Checkup</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Message / Symptoms</label>
+        <textarea placeholder="Briefly describe your eye concern or symptoms..."></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">📨 Send Appointment Request</button>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+  <div style="text-align:center;">
+    <div class="section-tag">Find Us</div>
+    <h2 class="section-title">Our Location</h2>
+    <p class="section-desc" style="margin:0 auto 36px;">Visit us at our clinic in Khamgaon, Maharashtra. We're easy to find and always welcoming new patients.</p>
+  </div>
+  <div class="map-container fade-in">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30023.4!2d76.5669!3d20.7066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd6db0f4b4b4b4b%3A0x0!2sKhamgaon%2C+Maharashtra!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+      allowfullscreen="" loading="lazy">
+    </iframe>
+  </div>
+  <div style="text-align:center;margin-top:24px;">
+    <a href="https://maps.google.com/?q=Mahalakshmi+Netralaya+Khamgaon+Maharashtra" target="_blank" class="btn-primary" style="display:inline-flex;">
+      🗺️ Open in Google Maps
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="name">👁️ Mahalakshmi Netralaya</div>
+      <p>Your trusted eye hospital in Khamgaon, Maharashtra. Providing compassionate, expert eye care with advanced technology for all age groups.</p>
+      <div style="margin-top:16px;">
+        <a href="tel:8970007351" style="color:var(--gold-light);text-decoration:none;font-weight:600;">📞 89700 07351</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#services">Cataract Surgery</a>
+      <a href="#services">LASIK Surgery</a>
+      <a href="#services">Glaucoma Treatment</a>
+      <a href="#services">Retina Services</a>
+      <a href="#services">Pediatric Eye Care</a>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="#home">Home</a>
+      <a href="#about">About Doctor</a>
+      <a href="#appointment">Book Appointment</a>
+      <a href="#location">Location</a>
+      <a href="mailto:mahalakshminetralaya@gmail.com">Email Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 <span>Mahalakshmi Netralaya</span> — Khamgaon, Maharashtra. All rights reserved.
+  </div>
+</footer>
+
+<!-- WhatsApp Float Button -->
+<a href="https://wa.me/918970007351" target="_blank" class="wa-float" title="Chat on WhatsApp">💬</a>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Mobile menu
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    if (links.style.display === 'flex') {
+      links.style.display = 'none';
+    } else {
+      links.style.cssText = 'display:flex;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:rgba(26,18,0,0.98);padding:20px 5%;gap:20px;';
+    }
+  }
+
+  // Form submit
+  function submitForm() {
+    const btn = document.querySelector('.form-submit');
+    btn.textContent = '✅ Request Sent! We will call you shortly.';
+    btn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
+    setTimeout(() => {
+      btn.textContent = '📨 Send Appointment Request';
+      btn.style.background = '';
+    }, 4000);
+  }
+</script>
+</body>
+</html>
